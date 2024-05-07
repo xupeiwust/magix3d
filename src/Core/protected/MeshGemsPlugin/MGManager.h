@@ -8,7 +8,7 @@
 #define MESHGEMS_MGMANAGER_H_
 /*----------------------------------------------------------------------------*/
 // GMDS File Headers
-#include "GMDS/Utils/CommonTypes.h"
+#include "gmds/utils/CommonTypes.h"
 /*----------------------------------------------------------------------------*/
 #include <vector>
 #include <string>

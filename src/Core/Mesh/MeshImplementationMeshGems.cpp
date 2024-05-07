@@ -384,7 +384,7 @@ meshTriangularMeshGems(Mesh::CommandCreateMesh* command, Topo::CoFace* fa)
 			}
 
 			gmds::Node ni = edge_nodes[i_nodes];
-			gmds::math::Point pi = ni.getPoint();
+			gmds::math::Point pi = ni.point();
 
 			gp_Pnt pnt(pi.X(),pi.Y(),pi.Z());
 			GeomAPI_ProjectPointOnCurve proj(pnt,occ_curve, first, last);
@@ -425,7 +425,7 @@ meshTriangularMeshGems(Mesh::CommandCreateMesh* command, Topo::CoFace* fa)
 		double xyz[3*nb_nodes];
 
 		for(unsigned i_n=0; i_n<nb_nodes; i_n++){
-			gmds::math::Point pi = nodes_i[i_n].getPoint();
+			gmds::math::Point pi = nodes_i[i_n].point();
 			xyz[3*i_n  ]=pi.X();
 			xyz[3*i_n+1]=pi.Y();
 			xyz[3*i_n+2]=pi.Z();
@@ -574,7 +574,7 @@ meshTriangularMeshGems(Mesh::CommandCreateMesh* command, Topo::CoFace* fa)
 //						if(p.isEpsilonEqual(pi,epsilon)){
 						if(std::fabs(p.getX()-pi.getX())<epsilonLocal && std::fabs(p.getY()-pi.getY())<epsilonLocal && std::fabs(p.getZ()-pi.getZ())<epsilonLocal) {
 							found_node = true;
-							node_ids[i] = ni.id()();
+							node_ids[i] = ni.id();
 						}
 					}
 
@@ -591,8 +591,8 @@ meshTriangularMeshGems(Mesh::CommandCreateMesh* command, Topo::CoFace* fa)
 			// Nouveau noeud de maillage
 
 			nd = getGMDSMesh().newNode(x, y, z);
-			command->addCreatedNode(nd.id()());
-			node_ids[i] =nd.id()();
+			command->addCreatedNode(nd.id());
+			node_ids[i] =nd.id();
 		}
 
 	}
@@ -613,8 +613,8 @@ meshTriangularMeshGems(Mesh::CommandCreateMesh* command, Topo::CoFace* fa)
 		fd_nodes[1] = getGMDSMesh().get<gmds::Node>(node_ids[current_nodes[1]]) ;
 		fd_nodes[2] = getGMDSMesh().get<gmds::Node>(node_ids[current_nodes[2]]) ;
 		gmds::Face fd = getGMDSMesh().newTriangle(fd_nodes[0], fd_nodes[1], fd_nodes[2]);
-		elem.push_back(f[iNode].id()());
-		command->addCreatedFace(f[iNode].id()());
+		elem.push_back(fd.id());
+		command->addCreatedFace(fd.id());
 	}
 
 	std::vector<std::string> groupsName;
